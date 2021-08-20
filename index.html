@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>MYUロボテスト：リモート制御テスト with Web Serial</title>
+		<script src="myu-robo-remote-serial.js"></script>
+	</head>
+	<body>
+		<h1>MYUロボテスト：リモート制御テスト with Web Serial</h1>
+		接続ボタンを押してMYUロボを選択します。<br>
+		操作ボタンを押してMYUロボを操作します。<br>
+		<br>
+		<table>
+			<tr>
+				<td></td>
+				<td><input type="button" id="btnForward" value="前進"></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><input type="button" id="btnTurnLeft" value="左回り"></td>
+				<td></td>
+				<td><input type="button" id="btnTurnRight" value="右回り"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="button" id="btnBackward" value="後退"></td>
+				<td></td>
+			</tr>
+		</table>
+		<div>
+			<input type="button" id="btnConnect" onClick="connect()" value="接続"><br>
+			<span id="deviceStatus">接続されていません。</span>
+		</div>
+		<br>
+		<a href="https://github.com/shogenji/myu-robo-remote-serial">https://github.com/shogenji/myu-robo-remote-serial</a>
+
+</body>
+</html>
