@@ -4,5 +4,4 @@
 
 ChromebookでMYUロボを制御するために試作したものです。
 
-https://shogenji.github.io/myu-robo-remote/
-
+https://shogenji.github.io/myu-robo-remote-serial/
