@@ -32,61 +32,51 @@ async function connect() {
 async function remoteForward() {
     if (!port) return;
 
-    const waitFor = duration => new Promise(r => setTimeout(r, duration));
-
     const writer = port.writable.getWriter();
     await writer.write(new Uint8Array([2]));
-    await waitFor(100);
-
     writer.releaseLock();
 }
 
 async function remoteBackward() {
     if (!port) return;
 
-    const waitFor = duration => new Promise(r => setTimeout(r, duration));
-
     const writer = port.writable.getWriter();
     await writer.write(new Uint8Array([8]));
-    await waitFor(100);
-
     writer.releaseLock();
 }
 
 async function remoteTurnLeft() {
     if (!port) return;
 
-    const waitFor = duration => new Promise(r => setTimeout(r, duration));
-
     const writer = port.writable.getWriter();
     await writer.write(new Uint8Array([11]));
-    await waitFor(100);
-
     writer.releaseLock();
 }
 
 async function remoteTurnRight() {
     if (!port) return;
 
-    const waitFor = duration => new Promise(r => setTimeout(r, duration));
-
     const writer = port.writable.getWriter();
     await writer.write(new Uint8Array([10]));
-    await waitFor(100);
-
     writer.releaseLock();
 }
 
 async function remoteMouseup() {
     if (!port) return;
 
-    const waitFor = duration => new Promise(r => setTimeout(r, duration));
-
     const writer = port.writable.getWriter();
     await writer.write(new Uint8Array([0]));
-    await waitFor(100);
-
     writer.releaseLock();
+}
+
+
+// RS-232C 1byte 出力
+async function sendrs232c(data) {
+    try {
+        await writer.write(new Uint8Array([data]));
+    } catch (error) {
+        console.error(error.name, error.message, "COMポートの設定が不適切です？");
+    }
 }
 
 function startup() {
