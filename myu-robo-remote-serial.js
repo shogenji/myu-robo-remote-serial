@@ -117,27 +117,24 @@ function startup() {
 
 document.addEventListener("DOMContentLoaded", startup);
 
-function handleConnectedDevice(e) {
-    console.log("Device connected: " + e.device.productName);
-}
-
-function handleDisconnectedDevice(e) {
-    console.log("Device disconnected: " + e.device.productName);
-
-    device = undefined;
-    document.getElementById("deviceStatus").innerText = "接続されていません。";
-}
-
-function handleInputReport(e) {
-    console.log(e.device.productName + ": got input report " + e.reportId);
-    console.log(new Uint8Array(e.data.buffer));
-}
-  
-navigator.hid.addEventListener("connect", handleConnectedDevice);
-navigator.hid.addEventListener("disconnect", handleDisconnectedDevice);
-navigator.hid.addEventListener("inputreport", handleInputReport);
     
+navigator.serial.addEventListener('connect', (e) => {
+    // Connect to `e.target` or add it to a list of available ports.
+    console.log("Serial port connected: " + e.target);
+});
+  
+navigator.serial.addEventListener('disconnect', (e) => {
+    // Remove `e.target` from the list of available ports.
+    console.log("Serial port disconnected");
 
+    port = undefined;
+    document.getElementById("deviceStatus").innerText = "接続されていません。";
+});
+  
+navigator.serial.getPorts().then((ports) => {
+    // Initialize the list of available ports with `ports` on page load.
+});
+  
 window.oncontextmenu = function(event) {
     event.preventDefault();
     event.stopPropagation();
