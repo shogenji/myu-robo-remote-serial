@@ -5,13 +5,15 @@ async function connect() {
 
     const filters = [
         {
-        //   usbVendorId: 0x04D8, // 
-        //   usbProductId: 0xFA8B // 
-            usbProductId: 8963,
-            usbVendorId: 1659
-        }
+            usbVendorId: 0x067b, // Prolific Technology, Inc.
+            usbProductId: 0x2303 //
+        },
+        {
+            usbVendorId: 0x0403, // Future Technology Devices International Limited
+            usbProductId: 0x6001 //
+        },
     ];
-
+    
     // Prompt user to select a MYU robo device.
     try {
         port = await navigator.serial.requestPort();
