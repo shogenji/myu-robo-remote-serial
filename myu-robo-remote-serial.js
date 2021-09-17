@@ -1,4 +1,4 @@
-let port;
+let port = undefined;
 
 async function connect() {
     console.log(event.type);
