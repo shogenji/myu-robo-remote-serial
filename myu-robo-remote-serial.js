@@ -12,6 +12,14 @@ async function connect() {
             usbVendorId: 0x0403, // Future Technology Devices International Limited
             usbProductId: 0x6001 //
         },
+        {   // SANWA USB-CVRS9
+            usbVendorId: 0x2008, // ATEN International Co. Ltd.
+            usbProductId: 0x0557 //
+        },
+        {   // HL-340
+            usbVendorId: 0x5523, // 
+            usbProductId: 0x4348 //
+        },
     ];
     
     // Prompt user to select a MYU robo device.
