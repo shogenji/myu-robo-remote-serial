@@ -16,8 +16,8 @@ async function connect() {
     
     // Prompt user to select a MYU robo device.
     try {
-        port = await navigator.serial.requestPort();
-        // port = await navigator.serial.requestPort({filters});
+        // port = await navigator.serial.requestPort();
+        port = await navigator.serial.requestPort({filters});
         if (!port) {
           return;
         }
