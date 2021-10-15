@@ -4,11 +4,11 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>MYUロボテスト：リモート制御テスト with Web Serial</title>
+		<title>MYUロボテスト：リモート制御テスト with Web Serial API</title>
 		<script src="myu-robo-remote-serial.js"></script>
 	</head>
 	<body>
-		<h1>MYUロボテスト：リモート制御テスト with Web Serial</h1>
+		<h1>MYUロボテスト：リモート制御テスト with Web Serial API</h1>
 		接続ボタンを押してMYUロボを選択します。<br>
 		操作ボタンを押してMYUロボを操作します。<br>
 		<br>
@@ -30,7 +30,8 @@
 			</tr>
 		</table>
 		<div>
-			<input type="button" id="btnConnect" onClick="connect()" value="接続"><br>
+			<input type="button" id="btnConnect" onClick="connect()" value="接続">
+			<input type="button" id="btnConnectWithout" value="接続（フィルタなし）"><br>
 			<span id="deviceStatus">接続されていません。</span>
 		</div>
 		<br>

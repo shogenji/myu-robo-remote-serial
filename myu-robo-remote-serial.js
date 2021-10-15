@@ -1,38 +1,40 @@
 let port = undefined;
 
 async function connect() {
-    console.log(event.type);
-
     const filters = [
-        {
-            usbVendorId: 0x067b, // Prolific Technology, Inc.
-            usbProductId: 0x2303 //
-        },
-        {
-            usbVendorId: 0x0403, // Future Technology Devices International Limited
-            usbProductId: 0x6001 //
-        },
-        {   // SANWA USB-CVRS9
-            usbVendorId: 0x2008, // ATEN International Co. Ltd.
-            usbProductId: 0x0557 //
-        },
-        {   // HL-340
-            usbVendorId: 0x5523, // 
-            usbProductId: 0x4348 //
-        },
+        { usbVendorId: 0x067b, usbProductId: 0x2303 },  // Prolific Technology, Inc.
+        { usbVendorId: 0x0403, usbProductId: 0x6001 },  // Future Technology Devices International Limited
+        { usbVendorId: 0x2008, usbProductId: 0x0557 },  // ATEN International Co. Ltd. (SANWA USB-CVRS9)
+        { usbVendorId: 0x5523, usbProductId: 0x4348 },  // (HL-340)
     ];
     
     // Prompt user to select a MYU robo device.
     try {
-        // port = await navigator.serial.requestPort();
         port = await navigator.serial.requestPort({filters});
+        const { usbProductId, usbVendorId } = port.getInfo();
+        if (!port) {
+          return;
+        }
+        // Wait for the HID connection to open.
+        await port.open({ baudRate: 9600 });
+        document.getElementById("deviceStatus").innerText = usbProductId + "(" + usbVendorId + ")" + "に接続しました。";
+    } catch (error) {
+        console.error(error.name, error.message);
+    }
+  }
+
+
+  async function connect_without_filters() {
+    // Prompt user to select a MYU robo device.
+    try {
+        port = await navigator.serial.requestPort();
         if (!port) {
           return;
         }
         // Wait for the HID connection to open.
         await port.open({baudRate: 9600});
         const {usbProductId, usbVendorId} = port.getInfo();
-        document.getElementById("deviceStatus").innerText = usbProductId + "に接続しました。";
+        document.getElementById("deviceStatus").innerText = usbProductId + "(" + usbVendorId + ")" + "に接続しました。";
     } catch (error) {
         console.error(error.name, error.message);
     }
@@ -98,6 +100,10 @@ function startup() {
     const btnConnect = document.getElementById('btnConnect');
     btnConnect.addEventListener('mouseup', connect, false);
     btnConnect.addEventListener('touchend', connect, false);
+
+    const btnConnectWithout = document.getElementById('btnConnectWithout');
+    btnConnectWithout.addEventListener('mouseup', connect_without_filters, false);
+    btnConnectWithout.addEventListener('touchend', connect_without_filters, false);
 
     const btnForward = document.getElementById('btnForward');
     const btnBackward = document.getElementById('btnBackward');
